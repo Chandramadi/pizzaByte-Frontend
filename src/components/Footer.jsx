@@ -9,7 +9,7 @@ function Footer() {
             <div className="bg-gradient-to-r from-amber-50 to-orange-300">
                 <div className="container flex flex-col flex-wrap px-5 py-10 mx-auto sm:flex-row md:px-8 px-2">
                     <p className="text-sm text-center text-gray-500 sm:text-left">
-                        &copy; 2024 PizzaByte
+                        &copy; 2025 PizzaByte
                     </p>
 
                     <span className="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
