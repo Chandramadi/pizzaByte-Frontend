@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SignUpPresentation from "./SignUpPresentation";
+import toast from "react-hot-toast";
 
 function SignUp() {
 
@@ -20,7 +21,13 @@ function SignUp() {
 
     function handleFormSubmit(event) {
         event.preventDefault(); // prevent the form from reloading the page
-        console.log(SignUpState);
+
+        if(!SignUpState.firstName || !SignUpState.email || !SignUpState.mobileNumber || !SignUpState.password) {
+            toast.error("Missing values from the form")
+        }
+        else {
+            toast.success("Account Created Successfully!")
+        }
     }
     
     return(

@@ -150,8 +150,6 @@ function Home() {
 
                     </div>
                 </section>
-
-
             </div>
         </Layouts>
     )
