@@ -1,11 +1,15 @@
+import { Link, useLocation } from "react-router-dom";
 import PizzaLogo from "../assets/images/pizza1.png";
 
 function Nav() {
+
+    const location = useLocation();
+
     return (
         <nav className="flex items-center justify-around h-20 text-[#6B7280] font-mono border-none shadow-md">
 
             <div className="flex items-center justify-center">
-                <a href="#"><p>Pizza App</p></a>
+                <Link to={"/"}><p>Pizza App</p></Link>
                 <img src={PizzaLogo} alt="Pizza logo" />
             </div>
 
