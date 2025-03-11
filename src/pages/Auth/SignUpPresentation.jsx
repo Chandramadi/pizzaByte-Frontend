@@ -27,6 +27,17 @@ function SignUpPresentation({handleUserInput, handleFormSubmit}) {
                         </div>
 
                         <div className="relative mb-4">
+                            <label htmlFor="lastName" className="text-sm leading-7 text-gray-600">Last Name</label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                onChange={handleUserInput}
+                                placeholder="Doe"
+                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                        </div>
+
+                        <div className="relative mb-4">
                             <label htmlFor="email" className="text-sm leading-7 text-gray-600">Email <span className="text-red-500">*</span></label>
                             <input
                                 type="email"
@@ -39,16 +50,17 @@ function SignUpPresentation({handleUserInput, handleFormSubmit}) {
                         </div>
 
                         <div className="relative mb-4">
-                            <label htmlFor="mobileNumber" className="text-sm leading-7 text-gray-600">Mobile Number <span className="text-red-500">*</span></label>
+                            <label htmlFor="phoneNumber" className="text-sm leading-7 text-gray-600">Mobile Number <span className="text-red-500">*</span></label>
                             <input
                                 type="tel"
                                 id="mobileNumber"
-                                name="mobileNumber"
+                                name="phoneNumber"
                                 onChange={handleUserInput}
                                 required
-                                maxLength={12}
+                                maxLength={10}
+                                autoComplete="tel"
                                 placeholder="Enter 10 digit mobile number"
-                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
                         </div>
 
                         <div className="relative mb-4">
