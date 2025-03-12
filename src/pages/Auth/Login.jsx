@@ -1,53 +1,53 @@
-import LoginPage from "../../Components/Svgs/LoginPage";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import LoginPresentaion from "./LoginPresentation";
+import { loginAccount } from "../../Redux/Slices/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Login() {
-    return (
-        <>
-            <section className="text-gray-600 body-font">
-                <div className="flex flex-wrap items-center h-screen px-10 py-6 mx-auto">
-                    <div className="hidden p-0 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 md:block">
-                        <LoginPage />
-                    </div>
 
-                    <form className="flex flex-col w-full p-8 mt-10 bg-gray-100 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
-                        <h2 className="mb-5 text-lg font-medium text-gray-900 title-font">Sign up</h2>
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    const [loginState, setLoginState] = useState({
+        email : '',
+        password : ''
+    })
 
-                        <div className="relative mb-4">
-                            <label htmlFor="email" className="text-sm leading-7 text-gray-600">Email <span className="text-red-500">*</span></label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                required
-                                placeholder="John@example.com"
-                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
-                        </div>
+    function handleUserInput(event) {
+        const {name, value} = event.target;
+        setLoginState((state)=>({
+            ...state,
+            [name] : value,
+        }))
+    }
 
-                        <div className="relative mb-4">
-                            <label htmlFor="password" className="text-sm leading-7 text-gray-600">Password  <span className="text-red-500">*</span></label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                required
-                                placeholder="Enter your password"
-                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
-                        </div>
+    async function handleFormSubmit(event) {
+        event.preventDefault(); // prevent the form from reloading the page
 
-                        <button
-                            className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600">
-                            Sign In
-                        </button>
+        if(!loginState.email || !loginState.password) {
+            toast.error("Missing values from the form")
+        }
 
-                        <p className="mt-3 text-xs text-gray-500">Don't have an account ?
-                            <Link to="/auth/signup" className="text-yellow-500">Sign Up</Link>
-                        </p>
-                    </form>
-                </div>
-            </section>
-        </>
+        if(loginState.password.length<8) {
+            toast.error("password should 8 characters long")
+        }
+        else {
+            const thunkResponse = await dispatch(loginAccount(loginState));
+            // tunkResponse.payload.data contains the data that the backend api sends
+            if(thunkResponse.payload.data.success) {
+                navigate("/");
+            }
+        }
+        
+    }
+
+    return(
+        <LoginPresentaion
+            handleUserInput = {handleUserInput}
+            handleFormSubmit = {handleFormSubmit}
+        />
     )
 }
 
