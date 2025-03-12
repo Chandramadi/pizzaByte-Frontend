@@ -7,8 +7,21 @@ import OrderFood from "../assets/images/OrderFood.png";
 import Enjoy from "../assets/images/enjoy.png";
 import PickUp from "../assets/images/pickup.png";
 import Layouts from "../Layouts/Layouts";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { product } from "../Redux/Slices/productSlice";
 
 function Home() {
+
+    const dispatch = useDispatch();
+
+    const productsData = useSelector(state=>state.product.productsData);
+
+    useEffect(()=>{
+    // This will be called when the components mount
+        dispatch(product());
+    }, []);
+
     return (
         <Layouts>
             <div>
@@ -47,6 +60,11 @@ function Home() {
                         />
                     </div>
                 </section>
+
+                {/* Product Section */}
+                {
+                    productsData.map((products, index)=><p key={products._id}>{products.productName}</p>)
+                }
 
                 {/* Services Section */}
                 <section
