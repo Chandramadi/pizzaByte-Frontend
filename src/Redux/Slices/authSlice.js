@@ -3,7 +3,7 @@ import axiosInstance from "../../helpers/axiosInstance";
 import toast from "react-hot-toast";
 
 const initialState = {
-    isLoggedIn: localStorage.getItem('isLoggedIn') === 'true' || 'false',
+    isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')) || false,
     role: localStorage.getItem('role') || '',
     data: JSON.parse(localStorage.getItem('data')) || {},
 };
@@ -54,7 +54,7 @@ export const logoutAccount = createAsyncThunk("/auth/logout", async()=>{
         const response = axiosInstance.post("/auth/logout");
         toast.promise(response, {
             success : (resolvedPromise)=>{
-                return resolvedPromise?.data?.message || "Log out successful"
+                return resolvedPromise?.data?.message || "Log out successful";
             },
             error : "Ohh No!, Something went wrong",
             loading: "logging Out...",

@@ -6,6 +6,7 @@ import Login from './Pages/Auth/Login';
 import NotFound from './Pages/NotFound';
 import Denied from './Pages/Denied';
 import AddProduct from './Pages/Admin/AddProduct';
+import ProductDetals from './Pages/Products/ProductDetails';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path='/auth/signUp' element={<SignUp />} />
       <Route path='/auth/login' element={<Login />} />
       <Route path='/admin/addProduct' element={<AddProduct/>} />
+      <Route path='/product/:productId' element={<ProductDetals/>} />
 
       {/* The Router will match the requested route. If no match is found, the NotFound page will be rendered. */}
       <Route path='*' element={<NotFound />} />

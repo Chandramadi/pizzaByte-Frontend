@@ -37,7 +37,7 @@ function Login() {
             const thunkResponse = await dispatch(loginAccount(loginState));
             // tunkResponse.payload.data contains the data that the backend api sends
             if(thunkResponse.payload.data.success) {
-                navigate("/");
+                navigate(-1);
             }
         }
         

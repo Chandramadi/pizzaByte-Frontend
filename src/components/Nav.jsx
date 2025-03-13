@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PizzaLogo from "../assets/images/pizza1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAccount } from "../Redux/Slices/authSlice";
@@ -7,14 +7,18 @@ function Nav() {
 
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     async function handleLogOut(event) {
         event.preventDefault();
         const thunkResponse = await dispatch(logoutAccount());
+        console.log(thunkResponse);
         if(thunkResponse.payload.data.success) {
             navigate("/");
         }
     }
+
+    console.log(isLoggedIn);
 
     return (
         <nav className="flex items-center justify-around h-20 text-[#6B7280] font-mono border-none shadow-md">
@@ -44,15 +48,15 @@ function Nav() {
 
                     {
                         isLoggedIn ?
-                            <li className='hover:text-[#FF9110] cursor-pointer'>
+                            (<li className='hover:text-[#FF9110] cursor-pointer'>
                                 {' '}
                                 <Link onClick={handleLogOut}>Log Out {' '}</Link>
-                            </li>
+                            </li>)
                             :
-                            <li className='hover:text-[#FF9110] cursor-pointer'>
+                            (<li className='hover:text-[#FF9110] cursor-pointer'>
                                 {' '}
                                 <Link to={"/auth/login"}>Log In{' '}</Link>
-                            </li>
+                            </li>)
                     }
 
                 </ul>
