@@ -7,20 +7,44 @@ import { useState } from "react";
 import FaceBook from "../../Components/Svgs/FaceBook";
 import Twitter from "../../Components/Svgs/Twitter";
 import InstaGram from "../../Components/Svgs/InstaGram";
+import { addProductToCart, removeProductFromCart, getCartDetails } from "../../Redux/Slices/cartSlice";
 
 function ProductDetals() {
 
     const { productId } = useParams();
     const dispatch = useDispatch();
     const [productDetails, setProductDetails] = useState({});
+    const [isInCart, setIsInCart] = useState(false); // Check if product is in cart
 
     async function getProductDetailsById() {
         const details = await dispatch(productDetailsById(productId));
         setProductDetails(details?.payload?.data?.data);
     }
 
+    async function checkIfInCart() {
+        const receivedCartDetails = await dispatch(getCartDetails());
+        const cartItems = receivedCartDetails?.payload?.data?.data?.items || [];
+        setIsInCart(cartItems.some(item => item.product._id === productId));
+    }
+
+    async function handleCart() {
+        const cartDetails = await dispatch(addProductToCart(productId));
+        if(cartDetails?.payload?.data?.success) {
+            checkIfInCart(); // Re-check the cart after adding
+        }
+    }
+
+    async function handleRemove() {
+        // Remove product from cart
+        const response = await dispatch(removeProductFromCart(productId));
+        if(response?.payload?.data?.success) {
+            checkIfInCart(); // Re-check the cart after adding
+        }
+    }
+
     useEffect(() => {
         getProductDetailsById();
+        checkIfInCart(); // Check if the product is in the cart after every load
     }, [productId]);
 
     return (
@@ -108,7 +132,7 @@ function ProductDetals() {
                             </div>
                             <p className="leading-relaxed">{productDetails?.description}</p>
 
-                            {/* <div className="flex pt-5">
+                            <div className="flex pt-5">
                                 <span className="text-2xl font-medium text-gray-900 title-font">
                                     ₹{productDetails?.price}
                                 </span>
@@ -127,7 +151,7 @@ function ProductDetals() {
                                         Add to Cart
                                     </button>
                                 )}
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>

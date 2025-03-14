@@ -2,10 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import PizzaLogo from "../assets/images/pizza1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAccount } from "../Redux/Slices/authSlice";
+import CartIcon from "../assets/svg/cart.svg";
 
 function Nav() {
 
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const { cartsData } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -13,7 +15,7 @@ function Nav() {
         event.preventDefault();
         const thunkResponse = await dispatch(logoutAccount());
         console.log(thunkResponse);
-        if(thunkResponse.payload.data.success) {
+        if (thunkResponse.payload.data.success) {
             navigate("/");
         }
     }
@@ -58,6 +60,23 @@ function Nav() {
                                 <Link to={"/auth/login"}>Log In{' '}</Link>
                             </li>)
                     }
+
+                    {
+                        isLoggedIn && (
+                            <Link to={'/cart'}>
+                                <li>
+                                    <img src={CartIcon} className='w-8 h-8 inline' />
+                                    {' '}
+                                    {   
+                                        cartsData?.items && cartsData?.items?.length>0 && // do not display zero
+                                        (
+                                            <p className='text-black inline'>{cartsData?.items?.length}</p>
+                                        )
+                                    }
+                                   
+                                </li>
+                            </Link>
+                    )}
 
                 </ul>
             </div>

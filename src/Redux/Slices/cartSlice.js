@@ -6,7 +6,7 @@ const initialState = {
     cartsData: '',
 }
 
-export const getCartDetails = createAsyncThunk("cart/getDetails", async (data) => {
+export const getCartDetails = createAsyncThunk("cart/getDetails", async () => {
     try {
         const response = axiosInstance.get("/cart");
         toast.promise(response, {
@@ -24,7 +24,7 @@ export const getCartDetails = createAsyncThunk("cart/getDetails", async (data) =
 
 export const addProductToCart = createAsyncThunk("cart/addProduct", async (productId) => {
     try {
-        const response = axiosInstance.post(`/carts/add/${productId}`);
+        const response = axiosInstance.post(`/cart/add/${productId}`);
         toast.promise(response, {
             loading: 'Adding product to cart',
             error: 'Something went wrong cannot add product to cart',
@@ -40,7 +40,7 @@ export const addProductToCart = createAsyncThunk("cart/addProduct", async (produ
 
 export const removeProductFromCart = createAsyncThunk('/cart/removeProduct', async (productId) => {
     try {
-        const response = axiosInstance.post(`/carts/remove/${productId}`);
+        const response = axiosInstance.post(`/cart/remove/${productId}`);
         toast.promise(response, {
             loading: 'Removing product from cart',
             error: 'Something went wrong cannot remove product from cart',

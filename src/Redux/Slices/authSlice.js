@@ -31,7 +31,6 @@ export const creatAccount = createAsyncThunk("/auth/createAccount", async(data)=
 })
 
 export const loginAccount = createAsyncThunk("/auth/login", async(data)=>{
-    console.log("from login", data);
     try {
         const response = axiosInstance.post("/auth/login", data);
         toast.promise(response, {
@@ -45,6 +44,7 @@ export const loginAccount = createAsyncThunk("/auth/login", async(data)=>{
         return apiResponse;
     }
     catch(error) {
+        console.log("login error",error);
         throw error;
     }
 })
@@ -64,6 +64,17 @@ export const logoutAccount = createAsyncThunk("/auth/logout", async()=>{
     }
     catch(error) {
         throw error;
+    }
+})
+
+// this thunk syncs cookies with localStorage isLoggedIn
+export const isLoggedInCheck = createAsyncThunk("/auth/loginCheck", async()=>{
+    try {
+        const response = await axiosInstance.get("/auth/isLoggedIn");
+        return response;
+    }
+    catch(error) {
+        return error;
     }
 })
 

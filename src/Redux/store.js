@@ -9,7 +9,11 @@ const store = configureStore({
         product : productSliceReducer,
         cart : cartSliceReducer,
     },
-    devTools: true
+    devTools: true,
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware({
+          serializableCheck: false,
+        }),
 })
 
 export default store;
