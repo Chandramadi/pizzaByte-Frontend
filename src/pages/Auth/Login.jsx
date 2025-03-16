@@ -1,9 +1,9 @@
 import { useState } from "react";
-import LoginPresentaion from "./LoginPresentation";
-import { loginAccount } from "../../Redux/Slices/authSlice";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { loginAccount } from "../../Redux/Slices/AuthSlice";
+import LoginPresentaion from "./LoginPresentation";
 
 function Login() {
 

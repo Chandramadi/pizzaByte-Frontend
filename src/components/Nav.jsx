@@ -1,7 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
-import PizzaLogo from "../assets/images/pizza1.png";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAccount } from "../Redux/Slices/authSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutAccount } from "../Redux/Slices/AuthSlice";
+import PizzaLogo from "../assets/images/pizza1.png";
 import CartIcon from "../assets/svg/cart.svg";
 
 function Nav() {
@@ -19,8 +19,6 @@ function Nav() {
             navigate("/");
         }
     }
-
-    console.log(isLoggedIn);
 
     return (
         <nav className="flex items-center justify-around h-20 text-[#6B7280] font-mono border-none shadow-md">

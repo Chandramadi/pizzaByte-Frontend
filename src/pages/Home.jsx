@@ -1,16 +1,16 @@
 import ArrowRightL from "../Components/Icons/ArrowRightL";
 import CheckmarkStarburst from "../Components/Icons/CheckmarkStarburst";
 
-import PizzaImage from "../assets/images/pizza2.png";
-import CookingImage from "../assets/images/cooking1.png";
-import OrderFood from "../assets/images/OrderFood.png";
-import Enjoy from "../assets/images/enjoy.png";
-import PickUp from "../assets/images/pickup.png";
-import Layouts from "../Layouts/Layouts";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { product } from "../Redux/Slices/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CookingImage from "../assets/images/cooking1.png";
+import Enjoy from "../assets/images/enjoy.png";
+import OrderFood from "../assets/images/OrderFood.png";
+import PickUp from "../assets/images/pickup.png";
+import PizzaImage from "../assets/images/pizza2.png";
+import Layouts from "../Layouts/Layouts";
+import { product } from "../Redux/Slices/ProductSlice";
 
 function Home() {
 

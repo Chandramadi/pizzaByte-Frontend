@@ -1,9 +1,9 @@
 import { useState } from "react";
-import SignUpPresentation from "./SignUpPresentation";
 import toast from "react-hot-toast";
-import { creatAccount } from "../../Redux/Slices/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { creatAccount } from "../../Redux/Slices/AuthSlice";
+import SignUpPresentation from "./SignUpPresentation";
 
 function SignUp() {
 

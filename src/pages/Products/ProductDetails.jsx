@@ -1,13 +1,12 @@
-import { Link, useParams } from "react-router-dom";
-import Layouts from "../../Layouts/Layouts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { productDetailsById } from "../../Redux/Slices/productSlice";
-import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import FaceBook from "../../Components/Svgs/FaceBook";
-import Twitter from "../../Components/Svgs/Twitter";
 import InstaGram from "../../Components/Svgs/InstaGram";
-import { addProductToCart, removeProductFromCart, getCartDetails } from "../../Redux/Slices/cartSlice";
+import Twitter from "../../Components/Svgs/Twitter";
+import Layouts from "../../Layouts/Layouts";
+import { addProductToCart, getCartDetails, removeProductFromCart } from "../../Redux/Slices/CartSlice";
+import { productDetailsById } from "../../Redux/Slices/ProductSlice";
 
 function ProductDetals() {
 
