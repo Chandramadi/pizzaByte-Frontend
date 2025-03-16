@@ -13,7 +13,7 @@ function Order() {
     const { cartsData } = useSelector((state) => state.cart);
 
     const [details, setDetails] = useState({
-        paymentMethod: 'OFFLINE',
+        paymentMethod: 'CASH',
         address: ''
     });
 
@@ -45,10 +45,6 @@ function Order() {
 
     }
 
-    useEffect(()=>{
-        dispatch(getCartDetails());
-    },[]);
-
     return (
         <Layouts>
             <section className="text-gray-600 body-font min-h-56">
@@ -78,7 +74,7 @@ function Order() {
                                 onChange={handleUserInput}
                                 className="p-2 border rounded-md focus:outline-none focus:border-primary-500 bg-white text-gray-700 w-full"
                             >
-                                <option value="OFFLINE">Offline</option>
+                                <option value="CASH">Offline</option>
                                 <option value="ONLINE">Online</option>
                             </select>
                         </div>

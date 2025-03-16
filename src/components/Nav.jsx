@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { logoutAccount } from "../Redux/Slices/AuthSlice";
 import PizzaLogo from "../assets/images/pizza1.png";
 import CartIcon from "../assets/svg/cart.svg";
+import { useEffect } from "react";
+import { getCartDetails } from "../Redux/Slices/CartSlice";
 
 function Nav() {
 
@@ -19,6 +21,10 @@ function Nav() {
             navigate("/");
         }
     }
+
+    useEffect(() => {
+        dispatch(getCartDetails());
+    }, []);
 
     return (
         <nav className="flex items-center justify-around h-20 text-[#6B7280] font-mono border-none shadow-md">
@@ -65,16 +71,16 @@ function Nav() {
                                 <li>
                                     <img src={CartIcon} className='w-8 h-8 inline' />
                                     {' '}
-                                    {   
-                                        cartsData?.items && cartsData?.items?.length>0 && // do not display zero
+                                    {
+                                        cartsData?.items && cartsData?.items?.length > 0 && // do not display zero
                                         (
                                             <p className='text-black inline'>{cartsData?.items?.length}</p>
                                         )
                                     }
-                                   
+
                                 </li>
                             </Link>
-                    )}
+                        )}
 
                 </ul>
             </div>
