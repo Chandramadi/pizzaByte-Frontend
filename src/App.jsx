@@ -11,27 +11,10 @@ import Home from "./pages/Home";
 import NotFound from './Pages/NotFound';
 import Order from './Pages/Order/Order';
 import ProductDetals from './Pages/Products/ProductDetails';
-import { isLoggedInCheck, logoutAccount } from './Redux/Slices/AuthSlice';
 import OrderSuccess from './Pages/Order/OrderSuccess';
 import RequireAuth from './Components/Auth/RequireAuth';
 
 function App() {
-
-  // the below code checks if the user is logged in 
-  // if the user visits after few days and the cookies have expired.
-  // syncing cookies with localStorage.
-  const dispatch = useDispatch();
-
-  async function check() {
-    const response = await dispatch(isLoggedInCheck());
-    if(response?.payload?.status===401 || response?.payload?.status===400) {
-      dispatch(logoutAccount());
-    }
-  }
-
-  useEffect(() => {
-    check();
-  }, []);
 
   return (
     <Routes>

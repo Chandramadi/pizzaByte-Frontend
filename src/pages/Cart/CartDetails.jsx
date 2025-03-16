@@ -25,7 +25,6 @@ function Cart() {
     }
 
     useEffect(() => {
-        console.log("re-rendering")
         fetchCartDetails();
     }, [cartsData?.items?.length]);
     

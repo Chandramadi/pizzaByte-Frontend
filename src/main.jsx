@@ -5,6 +5,9 @@ import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { Provider } from 'react-redux'
 import store from './Redux/store.js'
+import { setupInterceptors } from './helpers/setupInterceptors';
+
+setupInterceptors(store); // handles logout if the token expires
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
