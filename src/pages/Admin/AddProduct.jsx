@@ -1,7 +1,65 @@
 import Layouts from "../../Layouts/Layouts";
+import { addProduct } from "../../Redux/Slices/ProductSlice";
 import foodSvg from "../../assets/svg/food1.svg";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [productState, setProductState] = useState({
+        productName : '',
+        description : '',
+        productImage : '',
+        price : '',
+        quantity : '',
+        category : 'veg',
+    })
+
+    function handleUserInput(event) {
+        const { name, value, files, type } = event.target;
+    
+        if (type === "file") {
+            setProductState((state) => ({
+                ...state,
+                [name]: files[0], // <-- capture the File object here
+            }));
+        } else {
+            setProductState((state) => ({
+                ...state,
+                [name]: value,
+            }));
+        }
+    }
+
+    async function handleFormSubmit(event) {
+        event.preventDefault(); // prevent the form from reloading the page
+
+        if(!productState.productName || !productState.description || !productState.productImage || !productState.price || !productState.quantity || !productState.category) {
+            toast.error("Missing values from the form");
+        }
+
+        if(productState.description.length<6) {
+            toast.error("Product description must be at least 6 characters");
+        }
+        if(productState.productName.length<6) {
+            toast.error("Product description must be at least 6 characters");
+        }
+        else{
+            // Storing the user data in the database
+            const thunkResponse = await dispatch(addProduct(productState));
+            // tunkResponse.payload.data contains the data that the backend api sends
+            // and thunkResponse contains the data that the thunk sends
+            if(thunkResponse?.payload?.data?.success) {
+                navigate("/admin/addProduct/success");
+            }
+        }
+    }
+
     return (
         <Layouts>
             <section className="py-8">
@@ -28,6 +86,7 @@ function AddProduct() {
                                     required
                                     minLength={5}
                                     maxLength={20}
+                                    onChange={handleUserInput}
                                     name="productName"
                                     id="productName"
                                     className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -48,6 +107,7 @@ function AddProduct() {
                                     required
                                     minLength={5}
                                     maxLength={60}
+                                    onChange={handleUserInput}
                                     name="description"
                                     id="description"
                                     className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -68,6 +128,7 @@ function AddProduct() {
                                     required
                                     name="price"
                                     id="price"
+                                    onChange={handleUserInput}
                                     className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
                                 />
@@ -86,6 +147,7 @@ function AddProduct() {
                                     required
                                     name="quantity"
                                     id="quantity"
+                                    onChange={handleUserInput}
                                     className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 
                                 />
@@ -102,6 +164,7 @@ function AddProduct() {
                                 <select
                                     name="category"
                                     id="category"
+                                    onChange={handleUserInput}
                                     className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 >
                                     <option value="veg">Vegetarian</option>
@@ -123,6 +186,7 @@ function AddProduct() {
                                 <input
                                     type="file"
                                     required
+                                    onChange={handleUserInput}
                                     name="productImage"
                                     id="productImage"
                                     accept=".jpg, .jpeg, .png"
@@ -133,6 +197,7 @@ function AddProduct() {
 
                             <button
                                 type="submit"
+                                onClick={handleFormSubmit}
                                 className="w-full bg-yellow-500 text-white p-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 transition duration-300 ease-in-out"
                             >
                                 Add product

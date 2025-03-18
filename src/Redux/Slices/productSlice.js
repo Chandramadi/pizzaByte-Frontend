@@ -6,6 +6,28 @@ const initialState = {
     productsData : [], // array of products
 }
 
+export const addProduct = createAsyncThunk("/products", async (data) => {
+    try {
+        const responsePromise = axiosInstance.post("/products", data, {
+            headers: { // to handle image upload
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        toast.promise(responsePromise, {
+            success: "Product added successfully",
+            error: "Something went wrong, cannot add product",
+            loading: "Adding the product...",
+        });
+
+        const apiResponse = await responsePromise;
+        console.log("product slice", apiResponse);
+        return apiResponse;
+    } catch (error) {
+        throw error;
+    }
+});
+
 export const product = createAsyncThunk("/products/getAll", async()=>{
     try{
         const response = axiosInstance.get("/products");

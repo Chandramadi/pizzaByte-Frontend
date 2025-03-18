@@ -13,6 +13,7 @@ import Order from './Pages/Order/Order';
 import ProductDetals from './Pages/Products/ProductDetails';
 import OrderSuccess from './Pages/Order/OrderSuccess';
 import RequireAuth from './Components/Auth/RequireAuth';
+import ProductSuccess from './Pages/Admin/ProductSuccess';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
       {/* To only allow the admin users to acesss the below routes */}
       <Route path='/product/:productId' element={<ProductDetals />} />
       <Route path='/admin/addProduct' element={<AddProduct />} />
+      <Route path='/admin/addProduct/success' element={<ProductSuccess/>} />
 
       <Route path='/denied' element={<Denied />} />
 

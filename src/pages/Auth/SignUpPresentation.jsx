@@ -76,6 +76,18 @@ function SignUpPresentation({handleUserInput, handleFormSubmit}) {
                                 className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
                         </div>
 
+                        <div className="relative mb-4">
+                            <label htmlFor="role" className="text-sm leading-7 text-gray-600">Role</label>
+                            <input
+                                type="text"
+                                id="role"
+                                name="role"
+                                minLength={8}
+                                onChange={handleUserInput}
+                                placeholder="Enter your role - [USER, ADMIN]"
+                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                        </div>
+
                         <button
                             onClick={handleFormSubmit}
                             className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600">

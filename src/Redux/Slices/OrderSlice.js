@@ -15,10 +15,8 @@ export const placeOrder = createAsyncThunk('/order/placeOrder', async (paymentMe
             success: 'Order created successfully',
         });
         const apiResponse = await response;
-        console.log("from orderslice", response);
         return apiResponse;
     } catch(error) {
-        console.log(error);
         toast.error('Something went wrong');
     }
 });

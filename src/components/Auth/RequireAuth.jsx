@@ -3,9 +3,17 @@ import { Navigate, Outlet } from "react-router-dom";
 
 function RequireAuth() {
     
-    const { isLoggedIn } = useSelector(state=>state.auth);
+    const { isLoggedIn, role } = useSelector(state=>state.auth);
     
-    return isLoggedIn ? <Outlet/> : <Navigate to={'/auth/login'}/>
+    if(!isLoggedIn) {
+        <Navigate to={'/auth/login'}/>
+    }
+
+    if(!role) {
+        <Navigate to={'/'}/>
+    }
+
+    return <Outlet/>;
 }
 
 export default RequireAuth;

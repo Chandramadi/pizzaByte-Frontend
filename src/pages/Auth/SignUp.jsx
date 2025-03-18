@@ -15,15 +15,22 @@ function SignUp() {
         firstName : "",
         email : "",
         mobileNumber : "",
-        password : ""
+        password : "",
+        role : "USER",
     })
 
     function handleUserInput(event) {
-        const {name, value} = event.target;
-        setSignUpState((state)=>({
+        const { name, value } = event.target;
+        let processedValue = value;
+    
+        if (value.toLowerCase() === 'admin') {
+            processedValue = value.toUpperCase();
+        }
+    
+        setSignUpState((state) => ({
             ...state,
-            [name] : value,
-        }))
+            [name]: processedValue,
+        }));
     }
 
     async function handleFormSubmit(event) {
@@ -50,8 +57,8 @@ function SignUp() {
             const thunkResponse = await dispatch(creatAccount(SignUpState));
             // tunkResponse.payload.data contains the data that the backend api sends
             // and thunkResponse contains the data that the thunk sends
-            if(thunkResponse.payload.data.success) {
-                navigate("/auth/login");
+            if(thunkResponse?.payload?.data?.success) {
+                navigate(-1);
             }
         }
     }
