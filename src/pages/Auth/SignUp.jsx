@@ -43,7 +43,7 @@ function SignUp() {
         if(SignUpState.firstName.length<4) {
             toast.error("First Name must be atleast 4 character long");
         }
-        if(SignUpState.lastName.length<4) {
+        if(SignUpState.lastName && SignUpState.lastName.length<4) {
             toast.error("Last Name must be atleast 4 character long");
         }
         if(SignUpState.phoneNumber.length<10) {

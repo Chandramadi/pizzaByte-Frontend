@@ -1,33 +1,28 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layouts from "../../Layouts/Layouts";
 import { getCartDetails, removeProductFromCart } from "../../Redux/Slices/CartSlice";
 
 function Cart() {
 
-    const [cartDetails, setCartDetails] = useState();
-    const { cartsData } = useSelector(state=>state.cart);
+    const { cartsData } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    async function fetchCartDetails() {
-        const response = await dispatch(getCartDetails());
-        console.log(response);
-        setCartDetails(response?.payload?.data?.data);
-    }
+    useEffect(() => {
+        dispatch(getCartDetails());
+    }, []);
 
     async function handleRemove(productId) {
-        // Remove product from cart
         const response = await dispatch(removeProductFromCart(productId));
         if (response?.payload?.data?.success) {
-            dispatch(getCartDetails()); // Fetch cart details and update state
+            dispatch(getCartDetails()); // Refresh cart after deletion
         }
     }
 
-    useEffect(() => {
-        fetchCartDetails();
-    }, [cartsData?.items?.length]);
-    
+    const items = cartsData?.items || [];
+
     return (
         <Layouts>
             <section className="py-8 antialiased md:py-16 ">
@@ -35,12 +30,12 @@ function Cart() {
                     <h2 className="text-xl font-bold text-gray-900 sm:text-2xl">
                         Cart details
                     </h2>
-                    {cartDetails?.items?.length > 0 ? (
+                    {items.length > 0 ? (
                         <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8 ">
                             <div className="flex-none w-full mx-auto lg:max-w-2xl xl:max-w-4xl">
                                 <div className="space-y-6">
-                                    {cartDetails?.items.map((item) => (
-                                        <div key={item._id} className="p-4 text-gray-900 rounded-lg shadow-sm bg-gradient-to-r from-amber-50 to-orange-300 md:p-6 border">
+                                    {items.map((item) => (
+                                        <div key={item?.product?._id} className="p-4 text-gray-900 rounded-lg shadow-sm bg-gradient-to-r from-amber-50 to-orange-300 md:p-6 border">
                                             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                                                 <img
                                                     className="hidden w-20 h-20 dark:block rounded-md"
@@ -56,7 +51,7 @@ function Cart() {
                                                     <p> ₹{item?.product?.price} </p>
 
                                                     <div className="flex items-center gap-4">
-                                                        {item._id && (
+                                                        {item?.product?._id && (
                                                             <button
                                                                 type="button"
                                                                 onClick={() => handleRemove(item?.product?._id)}
@@ -98,35 +93,25 @@ function Cart() {
 
                                     <div className="space-y-4">
                                         <div className="space-y-2">
-                                            <dl className="flex items-center justify-between gap-4">
-
-                                                {
-                                                    cartDetails?.items.map((item) => {
-                                                        return (
-                                                            <dd key={item?.product?._id} className="text-base font-medium ">
-                                                                {item?.product?.productName} x {item?.quantity}
-
-                                                                <p>{item?.product?.price} x {item?.quantity}</p>
-                                                            </dd>
-                                                        )
-                                                    })
-                                                }
-
-
+                                            <dl className="flex flex-col gap-4">
+                                                {items.map((item) => (
+                                                    <dd key={item?.product?._id} className="text-base font-medium ">
+                                                        {item?.product?.productName} x {item?.quantity}
+                                                        <p>{item?.product?.price} x {item?.quantity}</p>
+                                                    </dd>
+                                                ))}
                                             </dl>
                                         </div>
 
                                         <dl className="flex items-center justify-between gap-4 pt-2 border-t border-gray-200 dark:border-gray-700">
                                             <dt className="text-base font-bold ">Total</dt>
                                             <dd className="text-base font-bold ">
-                                                ₹
-                                                {cartDetails?.items.length === 0
-                                                    ? ''
-                                                    : cartDetails?.items.reduce((acc, item) => acc + item?.quantity * item?.product?.price, 0)}
+                                                ₹{items.reduce((acc, item) => acc + item?.quantity * item?.product?.price, 0)}
                                             </dd>
                                         </dl>
                                     </div>
-                                    {cartDetails?.items.length > 0 && (
+
+                                    {items.length > 0 && (
                                         <Link
                                             to={'/order'}
                                             className="flex justify-center text-white bg-yellow-400 border border-yellow-500 rounded-md hover:bg-yellow-700"
@@ -136,12 +121,9 @@ function Cart() {
                                     )}
 
                                     <div className="flex items-center justify-center gap-2">
-                                        <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                            {' '}
-                                            or{' '}
-                                        </span>
+                                        <span className="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>
                                         <Link
-                                            to={'/'}
+                                            to={'/menu'}
                                             className="inline-flex items-center gap-2 text-sm font-medium underline text-primary-700 hover:no-underline dark:text-primary-500"
                                         >
                                             Continue Shopping
@@ -166,12 +148,20 @@ function Cart() {
                             </div>
                         </div>
                     ) : (
-                        'Cart is empty'
+                        <div className="flex flex-col items-center justify-center h-[60vh]">
+                            <p className="text-2xl font-[490]">Cart is empty</p>
+                            <button
+                                onClick={() => navigate('/menu')}
+                                className="bg-yellow-500 text-white px-4 py-2 rounded mt-4 font-[600]"
+                            >
+                                Go Back To Menu
+                            </button>
+                        </div>
                     )}
                 </div>
             </section>
         </Layouts>
-    )
+    );
 }
 
 export default Cart;

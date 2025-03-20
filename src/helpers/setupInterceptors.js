@@ -16,7 +16,7 @@ export const setupInterceptors = (store) => {
 
                 setTimeout(() => {
                     window.location.href = "/auth/login";
-                }, 10000);
+                }, 5000);
             }
 
             return Promise.reject(error);

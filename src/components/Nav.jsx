@@ -5,10 +5,11 @@ import PizzaLogo from "../assets/images/pizza1.png";
 import CartIcon from "../assets/svg/cart.svg";
 import { useEffect } from "react";
 import { getCartDetails } from "../Redux/Slices/CartSlice";
+import toast from "react-hot-toast";
 
 function Nav() {
 
-    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const { isLoggedIn, role} = useSelector(state => state.auth);
     const { cartsData } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -16,8 +17,17 @@ function Nav() {
     async function handleLogOut(event) {
         event.preventDefault();
         const thunkResponse = await dispatch(logoutAccount());
-        console.log(thunkResponse);
         if (thunkResponse.payload.data.success) {
+            navigate("/");
+        }
+    }
+
+    function handleNavigation() {
+        if(isLoggedIn && role==='ADMIN') {
+            navigate("/admin/addProduct");
+        }
+        else {
+            toast.error("Not an Admin");
             navigate("/");
         }
     }
@@ -39,12 +49,14 @@ function Nav() {
 
                     <li className='hover:text-[#FF9110] cursor-pointer'>
                         {' '}
-                        <p>Menu {' '}</p>
+                        <Link to={"/menu"}>Menu {' '}</Link>
                     </li>
 
-                    <li className='hover:text-[#FF9110] cursor-pointer'>
+                    <li className='hover:text-[#FF9110] cursor-pointer'
+                        onClick={handleNavigation}
+                    >
                         {' '}
-                        <p>Services {' '}</p>
+                        <p>Admin {' '}</p>
                     </li>
 
                     <li className='hover:text-[#FF9110] cursor-pointer'>

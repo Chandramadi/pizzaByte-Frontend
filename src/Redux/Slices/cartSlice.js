@@ -49,7 +49,6 @@ export const removeProductFromCart = createAsyncThunk('/cart/removeProduct', asy
         const apiResponse = await response;
         return apiResponse;
     } catch (error) {
-        console.log(error);
         toast.error('Something went wrong');
     }
 });
