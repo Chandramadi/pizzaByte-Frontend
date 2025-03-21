@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import axiosInstance from "./axiosInstance"; // import your instance here
-import { logoutAccount } from "../Redux/Slices/AuthSlice";
+import { logoutAccount } from "../redux/slices/authSlice";
 
 export const setupInterceptors = (store) => {
     axiosInstance.interceptors.response.use(
