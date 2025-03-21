@@ -1,10 +1,10 @@
-import Layouts from "../../Layouts/Layouts";
-import { addProduct } from "../../Redux/Slices/ProductSlice";
-import foodSvg from "../../assets/svg/food1.svg";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import foodSvg from "../../assets/svg/food1.svg";
+import Layouts from "../../layouts/Layouts";
+import { addProduct } from "../../redux/slices/productSlice";
 
 function AddProduct() {
 

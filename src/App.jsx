@@ -1,19 +1,19 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import AddProduct from './Pages/Admin/AddProduct';
-import Login from './Pages/Auth/Login';
-import SignUp from './Pages/Auth/SignUp';
-import Cart from './Pages/Cart/CartDetails';
-import Denied from './Pages/Denied';
+import RequireAuth from './components/auth/RequireAuth';
+import AddProduct from './pages/admin/AddProduct';
+import ProductSuccess from './pages/admin/ProductSuccess';
+import Login from './pages/auth/Login';
+import SignUp from './pages/auth/SignUp';
+import Cart from './pages/cart/CartDetails';
+import Denied from './pages/Denied';
 import Home from "./pages/Home";
-import NotFound from './Pages/NotFound';
-import Order from './Pages/Order/Order';
-import ProductDetals from './Pages/Products/ProductDetails';
-import OrderSuccess from './Pages/Order/OrderSuccess';
-import RequireAuth from './Components/Auth/RequireAuth';
-import ProductSuccess from './Pages/Admin/ProductSuccess';
-import Menu from './Pages/Products/Menu';
+import NotFound from './pages/NotFound';
+import Order from './pages/order/Order';
+import OrderSuccess from './pages/order/OrderSuccess';
+import Menu from './pages/products/Menu';
+import ProductDetals from './pages/products/ProductDetails';
 
 function App() {
 

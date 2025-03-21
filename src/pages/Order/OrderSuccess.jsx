@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Layouts from "../../Layouts/Layouts";
-import OrderSuccessImage from "../../assets/Images/ordered-success.png"
+import OrderSuccessImage from "../../assets/Images/ordered-success.png";
+import Layouts from "../../layouts/Layouts";
 
 function OrderSuccess() {
     

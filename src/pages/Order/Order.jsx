@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { placeOrder } from "../../Redux/Slices/OrderSlice";
-import Layouts from "../../Layouts/Layouts";
-import { getCartDetails } from "../../Redux/Slices/CartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Layouts from "../../layouts/Layouts";
+import { placeOrder } from "../../redux/slices/orderSlice";
 
 function Order() {
 

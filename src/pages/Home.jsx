@@ -1,12 +1,12 @@
-import ArrowRightL from "../Components/Icons/ArrowRightL";
-import CheckmarkStarburst from "../Components/Icons/CheckmarkStarburst";
+import { useNavigate } from "react-router-dom";
 import CookingImage from "../assets/images/cooking1.png";
 import Enjoy from "../assets/images/enjoy.png";
 import OrderFood from "../assets/images/OrderFood.png";
 import PickUp from "../assets/images/pickup.png";
 import PizzaImage from "../assets/images/pizza2.png";
-import Layouts from "../Layouts/Layouts";
-import { useNavigate } from "react-router-dom";
+import ArrowRightL from "../components/icons/ArrowRightL";
+import CheckmarkStarburst from "../components/icons/CheckmarkStarburst";
+import Layouts from "../layouts/Layouts";
 
 function Home() {
 

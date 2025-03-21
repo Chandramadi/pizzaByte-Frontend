@@ -1,11 +1,11 @@
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logoutAccount } from "../Redux/Slices/AuthSlice";
 import PizzaLogo from "../assets/images/pizza1.png";
 import CartIcon from "../assets/svg/cart.svg";
-import { useEffect } from "react";
-import { getCartDetails } from "../Redux/Slices/CartSlice";
-import toast from "react-hot-toast";
+import { logoutAccount } from "../redux/slices/authSlice";
+import { getCartDetails } from "../redux/slices/cartSlice";
 
 function Nav() {
 

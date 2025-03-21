@@ -1,5 +1,5 @@
-import LoginPage from "../../Components/Svgs/LoginPage";
 import { Link } from "react-router-dom";
+import LoginPage from "../../components/svgs/LoginPage";
 
 function LoginPresentaion({handleUserInput, handleFormSubmit}) {
     return (

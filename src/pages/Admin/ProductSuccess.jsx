@@ -1,7 +1,7 @@
+import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import Layouts from "../../Layouts/Layouts";
+import Layouts from "../../layouts/Layouts";
 
 export default function ProductSuccess() {
 

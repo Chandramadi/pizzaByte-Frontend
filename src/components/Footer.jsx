@@ -1,7 +1,7 @@
-import FaceBook from "./Svgs/FaceBook";
-import InstaGram from "./Svgs/InstaGram";
-import LinkedIn from "./Svgs/LinkedIn";
-import Twitter from "./Svgs/Twitter";
+import FaceBook from "./svgs/FaceBook";
+import InstaGram from "./svgs/InstaGram";
+import LinkedIn from "./svgs/LinkedIn";
+import Twitter from "./svgs/Twitter";
 
 function Footer() {
     return (

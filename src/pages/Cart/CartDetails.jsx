@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Layouts from "../../Layouts/Layouts";
-import { getCartDetails, removeProductFromCart } from "../../Redux/Slices/CartSlice";
+import Layouts from "../../layouts/Layouts";
+import { getCartDetails, removeProductFromCart } from "../../redux/slices/cartSlice";
 
 function Cart() {
 

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { product } from "../../Redux/Slices/ProductSlice";
-import Layouts from "../../Layouts/Layouts";
+import Layouts from "../../layouts/Layouts";
+import { product } from "../../redux/slices/productSlice";
 
 function Menu() {
 

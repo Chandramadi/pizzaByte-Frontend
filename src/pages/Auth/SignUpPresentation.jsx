@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import SignUpPage from "../../Components/Svgs/SignUpPage";
+import { Link } from "react-router-dom";
+import SignUpPage from "../../components/svgs/SignUpPage";
 
 function SignUpPresentation({handleUserInput, handleFormSubmit}) {
 

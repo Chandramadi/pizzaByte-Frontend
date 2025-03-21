@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { creatAccount } from "../../Redux/Slices/AuthSlice";
+import { creatAccount } from "../../redux/slices/authSlice";
 import SignUpPresentation from "./SignUpPresentation";
 
 function SignUp() {
