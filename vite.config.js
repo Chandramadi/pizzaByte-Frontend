@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/', // <-- ensures paths work correctly from the root
+  build: {
+    outDir: 'dist', // <-- tells Vite to put build files here (Render expects this by default)
+  },
   server: {
     https: true,
     cors: true
