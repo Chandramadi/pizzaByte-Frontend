@@ -8,7 +8,6 @@ export default defineConfig({
     outDir: 'dist', // <-- tells Vite to put build files here (Render expects this by default)
   },
   server: {
-    https: true,
     cors: true
   }
 })
